@@ -1,0 +1,141 @@
+body {
+  margin: 0;
+  font-size: calc(12px + (16 - 12) * ((100vw - 320px) / (1920 - 320)));
+}
+
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  padding: 0.98039vw 0;
+  margin: 0 5.88235vw;
+}
+
+.logo__img {
+  height: 2.94118vw;
+  min-height: 20px;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 1.47059vw;
+}
+
+.link__img {
+  padding: 0 1.47059vw;
+  height: 1.5em;
+}
+
+.at_right {
+  display: flex;
+  align-items: center;
+  margin-right: 5.88235vw;
+  margin-left: auto;
+}
+
+.menu_btn {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  cursor: pointer;
+  font-size: 3em;
+  font-weight: bold;
+  line-height: 1.2em;
+}
+
+.carousel {
+  position: relative;
+  height: 46.54vw;
+}
+
+.carousel__el {
+  position: absolute;
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+}
+
+.promo {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.promo__img {
+  width: 65%;
+}
+
+.promo__text {
+  font-size: 4.11765vw;
+  color: black;
+  text-shadow: 0px 0px 20px white, 0px 0px 20px white;
+  margin-top: -8.82353vw;
+}
+
+.control {
+  position: absolute;
+  top: 5.88235vw;
+  right: 5.88235vw;
+  padding: 1.47059vw;
+  background: rgba(255, 255, 255, 0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.control__btn {
+  background: white;
+  border-radius: 50px;
+  border: 0.29412vw solid black;
+  margin: 1.47059vw 0;
+  height: 0.58824vw;
+  width: 0.58824vw;
+  cursor: pointer;
+}
+
+.control__btn:hover,
+.control__btn.--active {
+  background: black;
+}
+
+.control__arrow {
+  padding: 1.47059vw 0;
+  font-size: 2.94118vw;
+}
+
+.page {
+  font-weight: bold;
+  padding: 1.47059vw 0;
+}
+
+.page__current {
+  font-size: 2.94118vw;
+}
+
+.page__all {
+  vertical-align: top;
+  font-size: 1.47059vw;
+}
+
+@media (max-width: 480px) {
+  .link {
+    display: none;
+  }
+}
