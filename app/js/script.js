@@ -1,11 +1,12 @@
 $("document").ready(function () {
-    carousel(3000)
+    carousel(2000)
+    blinkPromo()
 })
 
 function carousel(delay) {
-    this.currentCarouselElement = 0
-    this.carousel__els = $(".carousel__el")
-    this.createBtn = function (i) {
+    let currentCarouselElement = 0
+    let carousel__els = $(".carousel__el")
+    let createBtn = function (i) {
         let btn = $('<div class="control__btn"></div>')
         btn.click(function () {
             carousel__els.eq(i).toggleClass("--active")
@@ -16,11 +17,10 @@ function carousel(delay) {
             currentCarouselElement = i
             clearTimeout(timerId);
             setTimer()
-            blinkPromo(500)
         });
         return btn
     }
-    this.renderBtns = function () {
+    let renderBtns = function () {
         let btns_box = $(".control__btns_box")
         carousel__els.each(function (i) {
             btns_box.append(createBtn(i))
@@ -28,7 +28,7 @@ function carousel(delay) {
         $(".control__btn").eq(0).toggleClass("--active")
         $(".pagination__all").text("0" + carousel__els.length)
     }
-    this.arrowsHandler = function () {
+    let arrowsHandler = function () {
         let arrows = $(".control__arrow")
         let btns = $(".control__btn")
         arrows.eq(0).click(function () {
@@ -41,11 +41,11 @@ function carousel(delay) {
             btns.eq(currentCarouselElement - 1).click()
         })
     }
-    this.timerId = null
-    this.slide = function () {
+    let timerId = null
+    let slide = function () {
         $(".control__arrow").eq(0).click()
     }
-    this.setTimer = function () {
+    let setTimer = function () {
         timerId = setTimeout(function () {
             slide()
         }, delay);
@@ -56,9 +56,16 @@ function carousel(delay) {
     setTimer()
 }
 
-function blinkPromo(delay) {
-    $(".promo").toggleClass("--blink")
-    setTimeout(function () {
-        $(".promo").toggleClass("--blink")
-    }, delay);
+function blinkPromo() {
+    let delay = $(".promo").css("transition-duration")
+    delay = delay.substr(0, delay.length - 1)
+    delay *= 1000
+    let setTimer = function () {
+        setTimeout(function () {
+            $(".promo").toggleClass("--blink")
+            setTimer()
+            console.log(delay)
+        }, delay);
+    }
+    setTimer()
 }
