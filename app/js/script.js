@@ -31,14 +31,23 @@ function carousel(delay) {
     let arrowsHandler = function () {
         let arrows = $(".control__arrow")
         let btns = $(".control__btn")
-        arrows.eq(0).click(function () {
+        arrows.eq(0).click(function (event) {
+            console.log(event)
             if (currentCarouselElement >= carousel__els.length - 1) {
                 currentCarouselElement = -1
             }
             btns.eq(currentCarouselElement + 1).click()
         })
+        arrows.eq(0).contextmenu(function () {
+            arrows.eq(1).click()
+            return false
+        })
         arrows.eq(1).click(function () {
             btns.eq(currentCarouselElement - 1).click()
+        })
+        arrows.eq(1).contextmenu(function () {
+            arrows.eq(0).click()
+            return false
         })
     }
     let timerId = null
@@ -64,7 +73,6 @@ function blinkPromo() {
         setTimeout(function () {
             $(".promo").toggleClass("--blink")
             setTimer()
-            console.log(delay)
         }, delay);
     }
     setTimer()

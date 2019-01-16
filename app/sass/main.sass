@@ -20,16 +20,19 @@ body
     font-family: Helvetica
 //</теги>
 //<контейнеры>
-.header
+.header, .footer
     display: flex
     flex-wrap: wrap
-    justify-content: space-around
-    
-.footer
-    display: flex
-    flex-wrap: wrap
+.screen
+    position: relative
+    box-sizing: border-box
+    width: 100%
+    padding: $atom 2 * $atom
+    @media($extra_large)
+        padding: $atom
 //</контейнеры>
 //<блоки>
+//<блоки header, footer>
 .logo
     display: flex
     align-items: center
@@ -38,7 +41,6 @@ body
     &__img
         height: $atom
         min-height: 20px
-
 .link
     display: flex
     align-items: center
@@ -54,7 +56,6 @@ body
     align-items: center
     margin-right: 2*$atom
     margin-left: auto
-
 .menu_btn
     display: flex
     align-items: center
@@ -63,9 +64,11 @@ body
     font-size: 3em
     font-weight: bold
     line-height: 1em
-
+//</блоки header, footer>
+//<карусель>
 .carousel
     position: relative
+    width: 100%
     height: 46.54vw
     user-select: none
     &__el
@@ -82,7 +85,6 @@ body
             transition: opacity 1s, visibility .5s linear 2s
             transition-delay: 0s
 .promo
-    position: relative
     display: flex
     flex-direction: column
     justify-content: center
@@ -97,12 +99,11 @@ body
         width: 65%
     &__text
         font-size: 1.15*$atom
-        color: white
+        color: black
         margin-top: -3*$atom
     &.--blink
         opacity: 1
         text-shadow: 0px 0px 50px white, 0px 0px 50px white, 0px 0px 50px white, 0px 0px 50px white
-
 .control
     position: absolute
     top: 2 * $atom
@@ -127,7 +128,6 @@ body
         padding: .5 * $atom 0
         font-size: $atom
         cursor: pointer
-
 .pagination
     font-weight: bold
     padding: .5 * $atom 0
@@ -136,3 +136,61 @@ body
     &__all
         vertical-align: top
         font-size: .5 * $atom
+//</карусель>
+//<блоки main>
+.bg
+    position: absolute
+    background-size: cover
+    background-color: #f1f1f1
+    background-repeat: no-repeat
+    top: 0
+    left: 0
+    height: 100%
+    width: 100%
+    z-index: -1
+    &.--cover_by_width
+        background-size: 100%
+        background-position: center
+//<услуги>
+.row
+    display: flex
+    padding-bottom: $atom
+    &.--reverse
+        flex-direction: row-reverse
+        .col
+            padding: 0 $atom 0 0 
+        .card_service
+            flex-direction: row-reverse
+.col
+    display: flex
+    flex-direction: column
+    justify-content: space-between
+    flex-basis: 14 * $atom
+    padding: 0 2 * $atom
+    @media($extra_large)
+        padding: 0 0 0 $atom
+        flex-basis: 15 * $atom
+.card_service
+    position: relative
+    display: flex
+    align-items: flex-end
+    &.--big
+        flex-basis: 12 * $atom
+        min-height: 21em
+        @media($extra_large)
+            flex-basis: 14 * $atom
+    &.--small
+        flex-basis: 50%
+        .card_service__image
+            position: relative
+            width: 100%
+            height: 100%
+        &:nth-child(1)
+            margin-bottom: $atom/2
+.box
+    min-width: 21em
+    flex-basis: 21em
+    min-height: 21em
+    background: white
+//</услуги>
+//</блоки>
