@@ -49,8 +49,6 @@ body
     &__img
         padding: 0 $atom/2
         height: 1.5em
-    @media($small)
-        display: none
 .at_right
     display: flex
     align-items: center
@@ -165,6 +163,8 @@ body
         flex-direction: row-reverse
         .card_service
             flex-direction: row-reverse
+    &.--space-between
+        justify-content: space-around
 .col
     display: flex
     flex-direction: column
@@ -181,7 +181,6 @@ body
         min-height: 21em
     &.--big
         flex-basis: 12 * $atom
-        min-height: 21em
     &.--small
         flex-basis: 50%
         .card_service__image
@@ -191,19 +190,48 @@ body
         &:nth-child(1)
             margin-bottom: $atom/2
 //</услуги>
-//<услуги>
+//<мероприятия>
 .card_activity
     display: flex
     flex-direction: column
     justify-content: space-between
-    flex-basis: 25.5%
+    flex-basis: 7 * $atom
     background-color: white
-    margin: $atom/2 auto
+    margin: $atom/2
     &__image
         position: relative
-        display: flex
-        width: 100%
         z-index: 1
-        min-height: 5 * $atom
-//</услуги>
+        height: 14em
+//</мероприятия>
+//<люди>
+.card_people
+    display: flex
+    flex-direction: column
+    flex-basis: 6 * $atom
+    margin: $atom/2
+    border: 1px solid black
+    &__image
+        position: relative
+        height: 20em
+    &__fio
+        position: relative
+        display: flex
+        flex-direction: column
+        text-align: end
+        font-size: 1.75em
+        margin-top: -.75em
+        padding-right: .5em
+    &__triangle
+        position: absolute
+        top: -.8em
+        left: 0
+        height: 4em
+        width: 200%
+        z-index: -1
+        background: white
+        transform: rotate(-8deg)
+    &__box
+        text-align: center
+        min-height: 14em
+//</люди>
 //</блоки>
