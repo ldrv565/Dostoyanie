@@ -31,8 +31,7 @@ function carousel(delay) {
     let arrowsHandler = function () {
         let arrows = $(".control__arrow")
         let btns = $(".control__btn")
-        arrows.eq(0).click(function (event) {
-            console.log(event)
+        arrows.eq(0).click(function () {
             if (currentCarouselElement >= carousel__els.length - 1) {
                 currentCarouselElement = -1
             }
@@ -77,3 +76,57 @@ function blinkPromo() {
     }
     setTimer()
 }
+
+//* init  Ya map*/
+
+if ($("div").is("#map")) {
+    var win_width = $(window).width();
+
+    $(window).resize(function () {
+        if ($(window).width() < win_width - 20 || $(window).width() > win_width + 20) {
+            win_width = $(window).width();
+            child1 = $("#map").children("ymaps").eq(0)
+            child2 = child1.children("ymaps").eq(0)
+            child1.css.width = "100%"
+            child1.css.height = $("#map").height
+            child2.css.width = "100%"
+            child2.css.height = $("#map").height
+        }
+    });
+
+    ymaps.ready(init);
+
+    var myMap;
+
+    color = getHexRGBColor(color);
+
+    function init() {
+
+        ymaps.geocode(adress).then(function (res) {
+            myMap = new ymaps.Map("map", {
+                center: [res.geoObjects.get(0).geometry.getCoordinates()[0], res.geoObjects.get(0).geometry.getCoordinates()[1]],
+                zoom: 18
+            });
+
+            res.geoObjects.get(0).options.set({
+                iconColor: '#' + color
+
+            });
+            myMap.geoObjects.add(res.geoObjects.get(0));
+        });
+
+    }
+}
+
+function getHexRGBColor(color) {
+    color = color.replace(/\s/g, "");
+    var aRGB = color.match(/(\d{1,3}[%]?),(\d{1,3}[%]?),(\d{1,3}[%]?)$/i);
+
+    if (aRGB) {
+        color = '';
+        for (var i = 1; i <= 3; i++) color += Math.round((aRGB[i][aRGB[i].length - 1] == "%" ? 2.55 : 1) * parseInt(aRGB[i])).toString(16).replace(/^(.)$/, '0$1');
+    } else color = color.replace(/^#?([\da-f])([\da-f])([\da-f])$/i, '$1$1$2$2$3$3');
+
+    return color;
+}
+//* init  Ya map*/

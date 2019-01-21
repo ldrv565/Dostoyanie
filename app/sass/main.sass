@@ -30,6 +30,8 @@ body
     padding: $atom 2 * $atom
     @media($extra_large)
         padding: $atom
+    &.--full
+        padding: 0
 //</контейнеры>
 //<блоки>
 //<блоки header, footer>
@@ -164,7 +166,9 @@ body
         .card_service
             flex-direction: row-reverse
     &.--space-between
-        justify-content: space-around
+        justify-content: space-between
+    &.--small
+        padding-left: 8 * $atom
 .col
     display: flex
     flex-direction: column
@@ -197,7 +201,7 @@ body
     justify-content: space-between
     flex-basis: 7 * $atom
     background-color: white
-    margin: $atom/2
+    margin: $atom/2 0
     &__image
         position: relative
         z-index: 1
@@ -208,8 +212,8 @@ body
     display: flex
     flex-direction: column
     flex-basis: 6 * $atom
-    margin: $atom/2
     border: 1px solid black
+    margin: $atom/2 0
     &__image
         position: relative
         height: 20em
@@ -234,4 +238,39 @@ body
         text-align: center
         min-height: 14em
 //</люди>
+//<партнеры>
+.card_partner
+    display: flex
+    flex-direction: column
+    flex-basis: 6 * $atom
+    border-left: .25 * $atom solid black
+    border-top: .25 * $atom solid black
+    margin: $atom 0
+    &__image
+        position: relative
+        height: 4 * $atom
+        .bg
+            background-size: contain
+            background-position: center
+            background-color: white
+//</партнеры>
+//<карта>
+#map
+    width: 100%
+    height: 14 * $atom
+    min-height: 15em
+    padding: 0
+    margin: 0
+.contacts
+    position: absolute
+    top: 2.5 * $atom
+    right: 2 * $atom
+    width: 7 * $atom
+    height: 10.5 * $atom
+    min-width: 15em
+    min-height: 10em
+    background: rgba(white, .7)
+    p
+        margin: .5em
+//</карта>
 //</блоки>
