@@ -18,6 +18,10 @@ body
     margin: 0
     font-size: calc(12px + (16 - 12) * ((100vw - 320px) / (1920 - 320)))
     font-family: Helvetica
+    overflow-x: hidden
+h1, h2, h3
+    font-weight: unset
+    margin: unset
 //</теги>
 //<контейнеры>
 .header, .footer
@@ -27,9 +31,9 @@ body
     position: relative
     box-sizing: border-box
     width: 100%
-    padding: $atom 2 * $atom
+    padding: 2 * $atom
     @media($extra_large)
-        padding: $atom
+        padding: 2 * $atom $atom
     &.--full
         padding: 0
 //</контейнеры>
@@ -65,6 +69,16 @@ body
     font-weight: bold
     line-height: 1em
 //</блоки header, footer>
+//<блоки main>
+//<глобальные блоки>
+.title
+    text-align: center
+    font-size: 4em
+    margin-bottom: 1.5 * $atom
+    text-transform: uppercase
+    @media($medium)
+        font-size: 2.5em
+//</глобальные блоки>
 //<карусель>
 .carousel
     position: relative
@@ -74,6 +88,8 @@ body
     &__el
         position: absolute
         background-size: cover
+        background-position: center
+        background-repeat: no-repeat
         height: 100%
         width: 100%
         opacity: 0
@@ -84,6 +100,8 @@ body
             visibility: visible
             transition: opacity 1s, visibility .5s linear 2s
             transition-delay: 0s
+    @media($small)
+        height: 100vw
 .promo
     display: flex
     flex-direction: column
@@ -93,7 +111,7 @@ body
     height: 100%
     opacity: .6
     text-shadow: 0px 0px 12px white, 0px 0px 12px white
-    transition-duration: 500ms
+    transition-duration: 1500ms
     transition-timing-function: ease-out
     &__img
         width: 65%
@@ -106,9 +124,10 @@ body
         text-shadow: 0px 0px 50px white, 0px 0px 50px white, 0px 0px 50px white, 0px 0px 50px white
 .control
     position: absolute
+    font-size: 1 * $atom
     top: 2 * $atom
-    right: 2 * $atom 
-    padding: .5 * $atom
+    right: 2 * $atom
+    padding: .5em
     background: rgba(white, .5)
     display: flex
     flex-direction: column
@@ -117,44 +136,62 @@ body
     &__btns
     &__btn
         border-radius: 50px
-        border: .1 * $atom solid rgba(white, .6)
-        margin: .5 * $atom 0
-        height: .2 * $atom
-        width: .2 * $atom
+        border: .1em solid rgba(white, .6)
+        margin: .5em 0
+        height: .2em
+        width: .2em
         cursor: pointer
         &:hover, &.--active
             background: white
     &__arrow
-        padding: .5 * $atom 0
-        font-size: $atom
+        padding: .5em 0
+        font-size: 1em
         cursor: pointer
+    @media($small)
+        font-size: 2.5 * $atom
+        padding: .25em
+        right: 0
+        top: 1.25em
 .pagination
     font-weight: bold
-    padding: .5 * $atom 0
+    padding: .5em 0
     &__current
-        font-size: $atom
+        font-size: 1em
     &__all
         vertical-align: top
-        font-size: .5 * $atom
+        font-size: .5em
+        @media($small)
+    @media($small)
+        padding: 0
+        font-size: .75em
 //</карусель>
-//<блоки main>
 .bg
-    position: absolute
     background-size: cover
     background-color: #f1f1f1
+    background-position: center
     background-repeat: no-repeat
     top: 0
     left: 0
     height: 100%
     width: 100%
     z-index: -1
+    &.--absolute
+        position: absolute
     &.--cover_by_width
         background-size: 100%
-        background-position: center
+    &.--top
+        background-position: center top
 .box
-    background: white
     box-sizing: border-box
-    padding: 1em
+    padding: 2em
+    &__title
+        font-size: 2em
+        text-align: center
+    &__text
+        margin-top: 2em
+        font-size: .8em
+        @media($extra_large)
+            font-size: 1em
 //<услуги>
 .row
     display: flex
@@ -165,6 +202,8 @@ body
         flex-direction: row-reverse
         .card_service
             flex-direction: row-reverse
+            @media($extra_large)
+                flex-direction: column
     &.--space-between
         justify-content: space-between
     &.--small
@@ -175,69 +214,133 @@ body
     justify-content: space-between
     flex-basis: 14 * $atom
     margin: 0 auto
+    @media($extra_large)
+        flex-direction: row
+        flex-basis: 100%
+    @media($medium)
+        flex-wrap: wrap
 .card_service
     position: relative
     display: flex
     align-items: flex-end
+    &__image
+        @media($extra_large)
+            z-index: 1
+            position: relative
+            height: 30em
+            width: 100%
+            @media($medium)
+                height: 21em
     &__box
         min-width: 21em
         flex-basis: 21em
         min-height: 21em
+        background: white
+        @media($extra_large)
+            width: 100%
+            flex-basis: auto
     &.--big
         flex-basis: 12 * $atom
+        @media($extra_large)
+            flex-basis: 100%
     &.--small
         flex-basis: 50%
+        min-height: max-content
         .card_service__image
             position: relative
             width: 100%
             height: 100%
+            @media($extra_large)
+                height: 21em
         &:nth-child(1)
             margin-bottom: $atom/2
+        @media($extra_large)
+            flex-basis: 49%
+        @media($medium)
+            flex-basis: 100%
+    @media($extra_large)
+        flex-direction: column
+        margin-bottom: $atom/2
+        background: white
 //</услуги>
 //<мероприятия>
 .card_activity
     display: flex
     flex-direction: column
     justify-content: space-between
-    flex-basis: 7 * $atom
+    flex-basis: 8 * $atom
     background-color: white
     margin: $atom/2 0
     &__image
         position: relative
         z-index: 1
-        height: 14em
+        height: 15em
+    &__title
+        padding: .5em
+        font-size: 1.25em
+    &__date
+        font-size: 1.25em
+        padding-left: 1em
+        padding-bottom: 1em
+    @media($extra_large)
+        flex-basis: 10 * $atom
+    @media($medium)
+        flex-basis: 48%
+    @media($small)
+        flex-basis: 100%
 //</мероприятия>
 //<люди>
+.slider
+    &__wrap
+        position: relative
+        overflow: hidden
+    &__content
+        position: relative
+        top: 200px
+        margin-top: -200px
+        padding-bottom: 200px
+        display: flex
+        max-width: 100%
+        overflow-x: scroll
 .card_people
     display: flex
     flex-direction: column
-    flex-basis: 6 * $atom
-    border: 1px solid black
-    margin: $atom/2 0
+    min-width: 6 * $atom
+    margin: $atom .75 * $atom 
+    box-shadow: 5px 5px 50px rgba(black, .5)
+    &__wrap
+        position: relative
+        overflow: hidden
     &__image
-        position: relative
-        height: 20em
+        height: 25em
+        z-index: -1
+        img
+            width: 100%
+    &__triangle
+        position: absolute
+        bottom: -1.25em
+        left: 0
+        height: 4em
+        width: 200%
+        z-index: 2
+        background: white
+        transform: rotate(-8deg)
     &__fio
-        position: relative
         display: flex
         flex-direction: column
         text-align: end
         font-size: 1.75em
-        margin-top: -.75em
         padding-right: .5em
-    &__triangle
-        position: absolute
-        top: -.8em
-        left: 0
-        height: 4em
-        width: 200%
-        z-index: -1
-        background: white
-        transform: rotate(-8deg)
+    
     &__box
         text-align: center
-        min-height: 14em
-//</люди>
+        min-height: 3.5 * $atom
+    @media($extra_large)
+        min-width: 12 * $atom
+    @media($medium)
+        min-width: 16 * $atom
+    @media($small)
+        min-width: 30 * $atom
 //<партнеры>
 .card_partner
     display: flex
@@ -249,10 +352,16 @@ body
     &__image
         position: relative
         height: 4 * $atom
+        @media($extra_large)
+            height: 6 * $atom
         .bg
             background-size: contain
-            background-position: center
             background-color: white
+    @media($extra_large)
+        margin: $atom/4 0
+        flex-basis: 10 * $atom
+    @media($medium)
+        flex-basis: 48%
 //</партнеры>
 //<карта>
 #map
@@ -261,6 +370,8 @@ body
     min-height: 15em
     padding: 0
     margin: 0
+    @media($small)
+        height: 35 * $atom
 .contacts
     position: absolute
     top: 2.5 * $atom

@@ -1,6 +1,7 @@
 $("document").ready(function () {
     carousel(2000)
     blinkPromo()
+    slider(1000)
 })
 
 function carousel(delay) {
@@ -9,10 +10,11 @@ function carousel(delay) {
     let createBtn = function (i) {
         let btn = $('<div class="control__btn"></div>')
         btn.click(function () {
+            let controlBtns = $(".carousel").find(".control__btn")
             carousel__els.eq(i).toggleClass("--active")
             btn.toggleClass("--active")
             carousel__els.eq(currentCarouselElement).toggleClass("--active")
-            $(".control__btn").eq(currentCarouselElement).toggleClass("--active")
+            controlBtns.eq(currentCarouselElement).toggleClass("--active")
             $(".pagination__current").text("0" + (i + 1) + "/")
             currentCarouselElement = i
             clearTimeout(timerId);
@@ -21,16 +23,16 @@ function carousel(delay) {
         return btn
     }
     let renderBtns = function () {
-        let btns_box = $(".control__btns_box")
+        let btns_box = $(".carousel").find(".control__btns_box")
         carousel__els.each(function (i) {
             btns_box.append(createBtn(i))
         })
-        $(".control__btn").eq(0).toggleClass("--active")
+        $(".carousel").find(".control__btn").eq(0).toggleClass("--active")
         $(".pagination__all").text("0" + carousel__els.length)
     }
     let arrowsHandler = function () {
-        let arrows = $(".control__arrow")
-        let btns = $(".control__btn")
+        let arrows = $(".carousel").find(".control__arrow")
+        let btns = $(".carousel").find(".control__btn")
         arrows.eq(0).click(function () {
             if (currentCarouselElement >= carousel__els.length - 1) {
                 currentCarouselElement = -1
@@ -51,12 +53,79 @@ function carousel(delay) {
     }
     let timerId = null
     let slide = function () {
-        $(".control__arrow").eq(0).click()
+        $(".carousel").find(".control__arrow").eq(0).click()
     }
     let setTimer = function () {
         timerId = setTimeout(function () {
             slide()
         }, delay);
+    }
+
+    renderBtns()
+    arrowsHandler()
+    setTimer()
+}
+
+
+function slider(delay) {
+    let currentSlide = 0
+    let slider__els = $(".card_people")
+    let createBtn = function (i) {
+        let btn = $('<div class="control__btn"></div>')
+        btn.click(function () {
+            let controlBtns = $(".slider").find(".control__btn")
+            btn.toggleClass("--active")
+            controlBtns.eq(currentSlide).toggleClass("--active")
+            scroll(i)
+            currentSlide = i
+            clearTimeout(timerId);
+            setTimer()
+        });
+        return btn
+    }
+    let renderBtns = function () {
+        let btns_box = $(".slider").find(".control__btns_box")
+        slider__els.each(function (i) {
+            btns_box.append(createBtn(i))
+        })
+        $(".slider").find(".control__btn").eq(0).toggleClass("--active")
+    }
+    let arrowsHandler = function () {
+        let arrows = $(".slider").find(".control__arrow")
+        let btns = $(".slider").find(".control__btn")
+        arrows.eq(0).click(function () {
+            if (currentSlide >= slider__els.length - 1) {
+                currentSlide = -1
+            }
+            btns.eq(currentSlide + 1).click()
+        })
+        arrows.eq(0).contextmenu(function () {
+            arrows.eq(1).click()
+            return false
+        })
+        arrows.eq(1).click(function () {
+            btns.eq(currentSlide - 1).click()
+        })
+        arrows.eq(1).contextmenu(function () {
+            arrows.eq(0).click()
+            return false
+        })
+    }
+    let timerId = null
+    let slide = function () {
+        $(".slider").find(".control__arrow").eq(0).click()
+    }
+    let setTimer = function () {
+        timerId = setTimeout(function () {
+            slide()
+        }, delay);
+    }
+
+    let scroll = function (index) {
+        let content = $(".slider__content").eq(0)
+        content.animate({
+            scrollLeft: $(".card_people").eq(index)[0].scrollWidth * index
+        }, 200);
     }
 
     renderBtns()
