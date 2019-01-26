@@ -1,20 +1,20 @@
 $("document").ready(function () {
     carousel(2000)
     blinkPromo()
-    slider(1000)
+    slider(4000)
 })
 
 function carousel(delay) {
     let currentCarouselElement = 0
     let carousel__els = $(".carousel__el")
     let createBtn = function (i) {
-        let btn = $('<div class="control__btn"></div>')
+        let btn = $('<div class="control__btn bghc"></div>')
         btn.click(function () {
             let controlBtns = $(".carousel").find(".control__btn")
             carousel__els.eq(i).toggleClass("--active")
-            btn.toggleClass("--active")
+            btn.toggleClass("bgc")
             carousel__els.eq(currentCarouselElement).toggleClass("--active")
-            controlBtns.eq(currentCarouselElement).toggleClass("--active")
+            controlBtns.eq(currentCarouselElement).toggleClass("bgc")
             $(".pagination__current").text("0" + (i + 1) + "/")
             currentCarouselElement = i
             clearTimeout(timerId);
@@ -27,7 +27,7 @@ function carousel(delay) {
         carousel__els.each(function (i) {
             btns_box.append(createBtn(i))
         })
-        $(".carousel").find(".control__btn").eq(0).toggleClass("--active")
+        $(".carousel").find(".control__btn").eq(0).toggleClass("bgc")
         $(".pagination__all").text("0" + carousel__els.length)
     }
     let arrowsHandler = function () {
@@ -70,12 +70,14 @@ function carousel(delay) {
 function slider(delay) {
     let currentSlide = 0
     let slider__els = $(".card_people")
+    let slider__elWidth = $(".card_people").eq(currentSlide).outerWidth(true)
+    let slideElCount = Math.floor(($(".slider__content").outerWidth(true) + 20) / slider__elWidth)
     let createBtn = function (i) {
-        let btn = $('<div class="control__btn"></div>')
+        let btn = $('<div class="control__btn bghc"></div>')
         btn.click(function () {
             let controlBtns = $(".slider").find(".control__btn")
-            btn.toggleClass("--active")
-            controlBtns.eq(currentSlide).toggleClass("--active")
+            btn.toggleClass("bgc")
+            controlBtns.eq(currentSlide).toggleClass("bgc")
             scroll(i)
             currentSlide = i
             clearTimeout(timerId);
@@ -85,35 +87,35 @@ function slider(delay) {
     }
     let renderBtns = function () {
         let btns_box = $(".slider").find(".control__btns_box")
-        slider__els.each(function (i) {
+        for (let i = 0; i < slider__els.length / slideElCount; i++) {
             btns_box.append(createBtn(i))
-        })
-        $(".slider").find(".control__btn").eq(0).toggleClass("--active")
+        }
+        $(".slider").find(".control__btn").eq(0).toggleClass("bgc")
     }
     let arrowsHandler = function () {
         let arrows = $(".slider").find(".control__arrow")
         let btns = $(".slider").find(".control__btn")
-        arrows.eq(0).click(function () {
-            if (currentSlide >= slider__els.length - 1) {
+        arrows.eq(1).click(function () {
+            if (currentSlide >= slider__els.length / slideElCount - 1) {
                 currentSlide = -1
             }
             btns.eq(currentSlide + 1).click()
-        })
-        arrows.eq(0).contextmenu(function () {
-            arrows.eq(1).click()
-            return false
-        })
-        arrows.eq(1).click(function () {
-            btns.eq(currentSlide - 1).click()
         })
         arrows.eq(1).contextmenu(function () {
             arrows.eq(0).click()
             return false
         })
+        arrows.eq(0).click(function () {
+            btns.eq(currentSlide - 1).click()
+        })
+        arrows.eq(0).contextmenu(function () {
+            arrows.eq(1).click()
+            return false
+        })
     }
     let timerId = null
     let slide = function () {
-        $(".slider").find(".control__arrow").eq(0).click()
+        $(".slider").find(".control__arrow").eq(1).click()
     }
     let setTimer = function () {
         timerId = setTimeout(function () {
@@ -124,8 +126,8 @@ function slider(delay) {
     let scroll = function (index) {
         let content = $(".slider__content").eq(0)
         content.animate({
-            scrollLeft: $(".card_people").eq(index)[0].scrollWidth * index
-        }, 200);
+            scrollLeft: slider__elWidth * index * slideElCount
+        }, 400);
     }
 
     renderBtns()

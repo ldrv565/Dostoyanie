@@ -1,3 +1,11 @@
+@mixin addFont ($fontName)
+    font-family: $fontName
+    src: url('../fonts/'+$fontName+'.eot')
+    src: url('../fonts/'+$fontName+'.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/'+$fontName+'.woff') format('woff'),
+    url('../fonts/'+$fontName+'.ttf') format('truetype')
+@font-face 
+    @include addFont(HelveticaNeueCyrLight)
 //<сетка>
 $columns: 34
 $atom: 100vw / $columns
@@ -12,16 +20,21 @@ $extra_large: "max-width: 1350px"
 $large: "max-width: 1050px"
 $medium: "max-width: 768px"
 $small: "max-width: 480px"
+$extra_small: "max-width: 360px"
 //</брейкпоинты>
 //</теги>
 body
     margin: 0
     font-size: calc(12px + (16 - 12) * ((100vw - 320px) / (1920 - 320)))
-    font-family: Helvetica
+    font-family: HelveticaNeueCyrLight
+    font-weight: bold
     overflow-x: hidden
 h1, h2, h3
     font-weight: unset
     margin: unset
+a
+    text-decoration: unset
+    color: unset
 //</теги>
 //<контейнеры>
 .header, .footer
@@ -47,6 +60,8 @@ h1, h2, h3
     &__img
         height: $atom
         min-height: 20px
+    @media($small)
+        margin-right: 0
 .link
     display: flex
     align-items: center
@@ -55,6 +70,8 @@ h1, h2, h3
     &__img
         padding: 0 $atom/2
         height: 1.5em
+        @media($small)
+            height: 1em
 .at_right
     display: flex
     align-items: center
@@ -67,7 +84,6 @@ h1, h2, h3
     cursor: pointer
     font-size: 3em
     font-weight: bold
-    line-height: 1em
 //</блоки header, footer>
 //<блоки main>
 //<глобальные блоки>
@@ -84,7 +100,6 @@ h1, h2, h3
     position: relative
     width: 100%
     height: 46.54vw
-    user-select: none
     &__el
         position: absolute
         background-size: cover
@@ -128,30 +143,39 @@ h1, h2, h3
     top: 2 * $atom
     right: 2 * $atom
     padding: .5em
-    background: rgba(white, .5)
+    background: rgba(white, .7)
     display: flex
     flex-direction: column
     align-items: center
     color: rgba(white, .6)
-    &__btns
+    user-select: none
+    &__btns_box
     &__btn
         border-radius: 50px
-        border: .1em solid rgba(white, .6)
+        border: .1em solid
         margin: .5em 0
         height: .2em
         width: .2em
         cursor: pointer
-        &:hover, &.--active
-            background: white
+        background-color: white
     &__arrow
-        padding: .5em 0
         font-size: 1em
         cursor: pointer
+        padding-top: .22em
     @media($small)
         font-size: 2.5 * $atom
         padding: .25em
         right: 0
         top: 1.25em
+    &.--horisontal
+        position: static
+        flex-direction: row
+        justify-content: center
+        .control__btn
+            display: inline-block
+            margin: 0 $atom/2
+    @media($medium)
+        display: none
 .pagination
     font-weight: bold
     padding: .5em 0
@@ -167,7 +191,6 @@ h1, h2, h3
 //</карусель>
 .bg
     background-size: cover
-    background-color: #f1f1f1
     background-position: center
     background-repeat: no-repeat
     top: 0
@@ -207,6 +230,7 @@ h1, h2, h3
     &.--space-between
         justify-content: space-between
     &.--small
+        position: relative
         padding-left: 8 * $atom
 .col
     display: flex
@@ -265,12 +289,16 @@ h1, h2, h3
 //</услуги>
 //<мероприятия>
 .card_activity
+    position: relative
     display: flex
     flex-direction: column
     justify-content: space-between
     flex-basis: 8 * $atom
     background-color: white
     margin: $atom/2 0
+    border-right: 1px solid
+    border-bottom: 1px solid
+    overflow: hidden
     &__image
         position: relative
         z-index: 1
@@ -282,6 +310,14 @@ h1, h2, h3
         font-size: 1.25em
         padding-left: 1em
         padding-bottom: 1em
+    &__angle
+        position: absolute
+        bottom: -.5*$atom
+        right: -.5*$atom
+        height: $atom * 1
+        width: $atom * 1
+        transform: rotate(45deg)
+        background: #000
     @media($extra_large)
         flex-basis: 10 * $atom
     @media($medium)
@@ -306,14 +342,13 @@ h1, h2, h3
     display: flex
     flex-direction: column
     min-width: 6 * $atom
-    margin: $atom .75 * $atom 
+    margin: .75 * $atom
     box-shadow: 5px 5px 50px rgba(black, .5)
     &__wrap
         position: relative
         overflow: hidden
     &__image
         height: 25em
-        z-index: -1
         img
             width: 100%
     &__triangle
@@ -322,7 +357,6 @@ h1, h2, h3
         left: 0
         height: 4em
         width: 200%
-        z-index: 2
         background: white
         transform: rotate(-8deg)
     &__fio
@@ -331,7 +365,6 @@ h1, h2, h3
         text-align: end
         font-size: 1.75em
         padding-right: .5em
-    
     &__box
         text-align: center
         min-height: 3.5 * $atom
@@ -346,8 +379,8 @@ h1, h2, h3
     display: flex
     flex-direction: column
     flex-basis: 6 * $atom
-    border-left: .25 * $atom solid black
-    border-top: .25 * $atom solid black
+    border-left: .25 * $atom solid
+    border-top: .25 * $atom solid 
     margin: $atom 0
     &__image
         position: relative
@@ -362,6 +395,16 @@ h1, h2, h3
         flex-basis: 10 * $atom
     @media($medium)
         flex-basis: 48%
+
+.rotated_img
+    position: absolute
+    top: 0
+    bottom: 0
+    margin: auto
+    left: 2 * $atom
+    height: 20 * $atom
+    @media($extra_large)
+        left: $atom
 //</партнеры>
 //<карта>
 #map
@@ -370,18 +413,28 @@ h1, h2, h3
     min-height: 15em
     padding: 0
     margin: 0
+    @media($medium)
+        height: 25 * $atom
     @media($small)
         height: 35 * $atom
+    @media($extra_small)
+        height: 50 * $atom
 .contacts
     position: absolute
     top: 2.5 * $atom
     right: 2 * $atom
     width: 7 * $atom
-    height: 10.5 * $atom
+    min-height: 10.5 * $atom
     min-width: 15em
-    min-height: 10em
     background: rgba(white, .7)
+    font-size: 1.25em
     p
-        margin: .5em
+        margin: 1.25em
+        @media($medium)
+            margin: .25em
+    @media($medium)
+        top: 50px
+        right: 0
+        min-height: unset
 //</карта>
 //</блоки>
