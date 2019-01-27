@@ -564,6 +564,15 @@ a {
   margin: 1.25em;
 }
 
+.content {
+  box-sizing: border-box;
+}
+
+.content img {
+  max-width: 100%;
+  margin: 2em;
+}
+
 @media (max-width: 1350px) {
   .screen {
     padding: 5.88235vw 2.94118vw;
@@ -740,6 +749,11 @@ a {
 
   #map {
     height: 102.94118vw;
+  }
+
+  .content img {
+    margin-left: 0;
+    margin-right: 0;
   }
 }
 
