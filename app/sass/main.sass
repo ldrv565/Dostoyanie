@@ -177,6 +177,7 @@ a
     font-size: 3em
     font-weight: bold
     z-index: 5
+    user-select: none
     &__inner
         &.--close
             display: none
@@ -330,9 +331,13 @@ a
                 flex-direction: column
     &.--space-between
         justify-content: space-between
+    &.--center
+        justify-content: center
     &.--small
         position: relative
         padding-left: 8 * $atom
+    .card_people
+        margin: $atom/2
 .col
     display: flex
     flex-direction: column
@@ -443,8 +448,10 @@ a
     display: flex
     flex-direction: column
     min-width: 6 * $atom
+    flex-basis: 6 * $atom
     margin: .75 * $atom
     box-shadow: 5px 5px 50px rgba(black, .5)
+    background: white
     &__wrap
         position: relative
         overflow: hidden
@@ -471,10 +478,13 @@ a
         min-height: 3.5 * $atom
     @media($extra_large)
         min-width: 12 * $atom
+        flex-basis: 12 * $atom
     @media($medium)
         min-width: 16 * $atom
+        flex-basis: 16 * $atom
     @media($small)
         min-width: 30 * $atom
+        flex-basis: 30 * $atom
 //<партнеры>
 .card_partner
     display: flex
