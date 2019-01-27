@@ -148,6 +148,14 @@ function blinkPromo() {
     setTimer()
 }
 
+if ($("div").is(".menu_btn")) {
+    $(".menu_btn").click(function () {
+        $(".menu").toggleClass("--active")
+        $(".menu_btn").toggleClass("--active")
+    })
+}
+
+
 //* init  Ya map*/
 
 if ($("div").is("#map")) {

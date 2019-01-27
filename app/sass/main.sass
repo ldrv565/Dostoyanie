@@ -6,6 +6,8 @@
     url('../fonts/'+$fontName+'.ttf') format('truetype')
 @font-face 
     @include addFont(HelveticaNeueCyrLight)
+@font-face 
+    @include addFont(MyriadProRegular)
 //<сетка>
 $columns: 34
 $atom: 100vw / $columns
@@ -40,6 +42,7 @@ a
 .header, .footer
     display: flex
     flex-wrap: wrap
+    height: 5em
 .screen
     position: relative
     box-sizing: border-box
@@ -51,6 +54,88 @@ a
         padding: 0
 //</контейнеры>
 //<блоки>
+//<меню>
+.menu
+    display: none
+    position: absolute
+    top: 0
+    right: 0
+    left: 0
+    bottom: 0
+    z-index: 3
+    background: rgba(white, .85)
+    justify-content: flex-end
+    user-select: none
+    &__col
+        position: relative
+        margin: 5em
+        margin-bottom: 0
+        display: flex
+        flex-direction: column
+        justify-content: space-around
+        box-sizing: border-box
+        text-align: right
+        @media($large)
+            margin-right: 1em
+        &.--sub
+            display: none
+            position: absolute
+            justify-content: flex-start
+            margin: 0
+            left: - 150%
+            top: 0
+            text-align: center
+            background: white
+            height: 100%
+            padding: 2em
+            border-right-width: 1px
+            border-right-style: solid
+            border-bottom-width: 1px
+            border-bottom-style: solid
+    &__item
+        font-family: MyriadProRegular
+        font-weight: lighter
+        text-transform: uppercase
+        cursor: pointer
+        @media($large)
+            font-size: .5em
+        span
+            position: relative
+            font-size: 2.5em
+        &.--sub
+            @media($large)
+                font-size: 1em
+            span
+                color: #000
+                font-size: 2em
+                margin: 2em
+                line-height: 2em
+            &:hover
+                span
+                    border-bottom-width: 1px
+                    border-bottom-style: solid     
+        &:hover
+            .menu__col.--sub, .menu__line, .menu__holder
+                display: flex
+    &__line
+        display: none
+        position: absolute
+        top: 50%
+        width: 15em
+        height: 0
+        right: 100%
+        border-bottom: 1px dashed
+    &__holder
+        display: none
+        position: absolute
+        top: 0
+        width: 15em
+        height: 100%
+        right: 100%
+    &.--active
+        display: flex
+
+//</меню>
 //<блоки header, footer>
 .logo
     display: flex
@@ -72,6 +157,11 @@ a
         height: 1.5em
         @media($small)
             height: 1em
+    @media($small)
+        width: 0
+        margin: auto
+        white-space: nowrap
+        color: transparent
 .at_right
     display: flex
     align-items: center
@@ -84,6 +174,15 @@ a
     cursor: pointer
     font-size: 3em
     font-weight: bold
+    z-index: 5
+    &__inner
+        &.--close
+            display: none
+    &.--active
+        .menu_btn__inner.--open
+            display: none
+        .menu_btn__inner.--close
+            display: flex
 //</блоки header, footer>
 //<блоки main>
 //<глобальные блоки>
