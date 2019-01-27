@@ -82,12 +82,13 @@ a
             position: absolute
             justify-content: flex-start
             margin: 0
-            left: - 150%
+            left: -30em
             top: 0
             text-align: center
             background: white
             height: 100%
             padding: 2em
+            width: 25em
             border-right-width: 1px
             border-right-style: solid
             border-bottom-width: 1px
@@ -97,31 +98,32 @@ a
         font-weight: lighter
         text-transform: uppercase
         cursor: pointer
+        max-width: 25em
         @media($large)
             font-size: .5em
-        span
-            position: relative
-            font-size: 2.5em
         &.--sub
             @media($large)
                 font-size: 1em
-            span
+            .menu__inner
                 color: #000
                 font-size: 2em
                 margin: 2em
                 line-height: 2em
             &:hover
-                span
+                .menu__inner
                     border-bottom-width: 1px
                     border-bottom-style: solid     
         &:hover
             .menu__col.--sub, .menu__line, .menu__holder
                 display: flex
+    .menu__inner
+        position: relative
+        font-size: 2.5em
     &__line
         display: none
         position: absolute
         top: 50%
-        width: 15em
+        width: calc(20em - 100%)
         height: 0
         right: 100%
         border-bottom: 1px dashed
