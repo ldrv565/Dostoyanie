@@ -48,6 +48,7 @@ a
     box-sizing: border-box
     width: 100%
     padding: 2 * $atom
+    overflow: hidden
     @media($extra_large)
         padding: 2 * $atom $atom
     &.--full
@@ -336,6 +337,20 @@ a
     &.--small
         position: relative
         padding-left: 8 * $atom
+    &.--schedule
+        align-items: center
+        justify-content: space-around
+    &.--teachers
+        flex-wrap: nowrap
+        align-items: center
+        justify-content: center
+        .card_people
+            flex-basis: 3.5 * $atom
+            min-width: unset
+            font-size: .5em
+            .card_people__box
+        @media($medium)
+            flex-wrap: wrap
     .card_people
         margin: $atom/2
 .col
@@ -515,6 +530,7 @@ a
     margin: auto
     left: 2 * $atom
     height: 20 * $atom
+    z-index: -1
     @media($extra_large)
         left: $atom
 //</партнеры>
@@ -564,3 +580,71 @@ a
         @media($small)
             margin-left: 0
             margin-right: 0
+.day
+    position: relative
+    margin: $atom
+    &__img
+        max-width: 100%
+    &__text
+        position: absolute
+        display: flex
+        flex-direction: column
+        justify-content: center
+        align-items: center
+        font-size: 1.5em
+        top: 0
+        left: 0
+        right: 0
+        bottom: 0
+    &.--ponedelnik
+        transform: rotate(-10deg)
+    &.--vtornik
+    &.--sreda
+        transform: rotate(9deg)
+    &.--chetverg
+        transform: rotate(26deg)
+        margin-top: 3*$atom
+        margin-bottom: -1*$atom
+        @media($large)
+            margin: $atom
+    &.--pyatnica
+        transform: rotate(-12deg)
+    &.--subbota
+        transform: rotate(-4deg)
+    &.--voskresenye
+        transform: rotate(13deg)
+        margin-top: 2*$atom
+        @media($large)
+            margin: unset
+    @media($medium)
+        transform: unset !important
+.select
+    position: relative
+    width: 30em
+    height: 3em
+    margin: auto
+    max-width: 100%
+    background: white
+    user-select: none
+    &__item
+        position: relative
+        display: none
+        font-size: 2em
+        z-index: 1
+        background: white
+        outline: 1px solid black
+        padding: .25em
+        padding-left: .5em
+        cursor: pointer
+        &.--selected
+            display: block
+    &.--active
+        .select__item
+            display: block
+    &__triangle
+        position: absolute
+        top: 35%
+        right: 1em
+        bottom: 0
+        z-index: 2
+        transform: rotate(45deg)

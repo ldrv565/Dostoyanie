@@ -42,6 +42,7 @@ a {
   box-sizing: border-box;
   width: 100%;
   padding: 5.88235vw;
+  overflow: hidden;
 }
 
 .screen.--full {
@@ -379,6 +380,23 @@ a {
   padding-left: 23.52941vw;
 }
 
+.row.--schedule {
+  align-items: center;
+  justify-content: space-around;
+}
+
+.row.--teachers {
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.row.--teachers .card_people {
+  flex-basis: 10.29412vw;
+  min-width: unset;
+  font-size: .5em;
+}
+
 .row .card_people {
   margin: 1.47059vw;
 }
@@ -551,6 +569,7 @@ a {
   margin: auto;
   left: 5.88235vw;
   height: 58.82353vw;
+  z-index: -1;
 }
 
 #map {
@@ -592,6 +611,94 @@ a {
 .content img {
   max-width: 100%;
   margin: 2em;
+}
+
+.day {
+  position: relative;
+  margin: 2.94118vw;
+}
+
+.day__img {
+  max-width: 100%;
+}
+
+.day__text {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5em;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.day.--ponedelnik {
+  transform: rotate(-10deg);
+}
+
+.day.--sreda {
+  transform: rotate(9deg);
+}
+
+.day.--chetverg {
+  transform: rotate(26deg);
+  margin-top: 8.82353vw;
+  margin-bottom: -2.94118vw;
+}
+
+.day.--pyatnica {
+  transform: rotate(-12deg);
+}
+
+.day.--subbota {
+  transform: rotate(-4deg);
+}
+
+.day.--voskresenye {
+  transform: rotate(13deg);
+  margin-top: 5.88235vw;
+}
+
+.select {
+  position: relative;
+  width: 30em;
+  height: 3em;
+  margin: auto;
+  max-width: 100%;
+  background: white;
+  user-select: none;
+}
+
+.select__item {
+  position: relative;
+  display: none;
+  font-size: 2em;
+  z-index: 1;
+  background: white;
+  outline: 1px solid black;
+  padding: .25em;
+  padding-left: .5em;
+  cursor: pointer;
+}
+
+.select__item.--selected {
+  display: block;
+}
+
+.select.--active .select__item {
+  display: block;
+}
+
+.select__triangle {
+  position: absolute;
+  top: 35%;
+  right: 1em;
+  bottom: 0;
+  z-index: 2;
+  transform: rotate(45deg);
 }
 
 @media (max-width: 1350px) {
@@ -683,6 +790,14 @@ a {
   .menu__item.--sub {
     font-size: 1em;
   }
+
+  .day.--chetverg {
+    margin: 2.94118vw;
+  }
+
+  .day.--voskresenye {
+    margin: unset;
+  }
 }
 
 @media (max-width: 768px) {
@@ -692,6 +807,10 @@ a {
 
   .control {
     display: none;
+  }
+
+  .row.--teachers {
+    flex-wrap: wrap;
   }
 
   .col {
@@ -727,6 +846,10 @@ a {
     top: 50px;
     right: 0;
     min-height: unset;
+  }
+
+  .day {
+    transform: unset !important;
   }
 }
 

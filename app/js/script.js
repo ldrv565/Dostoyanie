@@ -155,6 +155,20 @@ if ($("div").is(".menu_btn")) {
     })
 }
 
+if ($("div").is(".select")) {
+    $(".select").click(function () {
+        $(".select").toggleClass("--active")
+    })
+}
+
+if ($("div").is(".select__item")) {
+    $(".select__item").click(function () {
+        if (!$(this).is(".--selected")) {
+            $(".--selected").toggleClass("--selected c")
+            $(this).toggleClass("--selected c")
+        }
+    })
+}
 
 //* init  Ya map*/
 
